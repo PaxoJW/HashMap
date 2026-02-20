@@ -15,4 +15,11 @@ test.set('jacket', 'blue');
 test.set('kite', 'pink');
 test.set('lion', 'golden');
 
+console.log(test.get('lion')); //golden
+console.log(test.get('apple')); //red
+
+console.log(test.has('dog')); //true
+console.log(test.has('monkey')); //false
+console.log(test.has('hat'));
+
 console.log(test.map);
