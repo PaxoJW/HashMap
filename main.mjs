@@ -20,6 +20,10 @@ console.log(test.get('apple')); //red
 
 console.log(test.has('dog')); //true
 console.log(test.has('monkey')); //false
-console.log(test.has('hat'));
+console.log(test.has('hat')); //true
+
+console.log(test.length()); //12
+test.clear();
+console.log(test.length()); //0
 
 console.log(test.map);

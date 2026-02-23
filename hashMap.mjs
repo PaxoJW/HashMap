@@ -78,7 +78,28 @@ function hashMap() {
         return false;
     }
 
-    return {hash, set, get, has, remove, get map() { return map;}};
+    function length() {
+        let length = 0;
+        for (let el of map) {
+            if (el !== undefined) {
+                while (el !== null) {
+                el = el.nextNode;
+                length ++;
+                }
+            }
+        }
+        return length;
+    }
+
+    
+    function clear() {
+        map = Array(capacity);
+    }
+
+
+
+
+    return {hash, set, get, has, remove, clear, length, get map() { return map;}};
 }
 
 //p is the [key, value] pair
