@@ -1,8 +1,7 @@
 function hashMap() {
     let capacity = 16;
     let loadFactor = 0.75;
-    const maxInputs = Math.floor(capacity * loadFactor);
-    let nOfInp = 0;
+    // const maxInputs = Math.floor(capacity * loadFactor);
 
     let map = Array(capacity);
     
@@ -18,22 +17,29 @@ function hashMap() {
     }
 
     function set(key, value) {
-        if (nOfInp > maxInputs) {
-            return; //will need to expand array memory later
-        }
+        // if (hashMap.length > maxInputs) {
+        //     return; //will need to expand array memory later
+        // }
         const hashCode = hash(key);
         if (map[hashCode] === undefined) {
             map[hashCode] = Node([key, value]);
             console.log("im running");
         } else {
             let bucket = map[hashCode];
-            while (bucket.nextNode !== null) {
-                console.log("im running 2");
-                bucket = bucket.nextNode;
+            while (bucket.pair[0] !== key) {
+                if (bucket.nextNode !== null) {
+                    console.log("im running 2");
+                    bucket = bucket.nextNode;
+                } else {
+                    console.log("im running 3");
+                    bucket.nextNode = Node([key, value]);
+                    return;
+                }
             }
-            bucket.nextNode = Node([key, value]);
+            console.log("im running 4");
+            bucket.pair[1] = value;
+            console.log("bucket:", bucket)
         }
-        nOfInp ++;
     }
 
     function get(key) {
