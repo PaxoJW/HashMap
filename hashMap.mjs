@@ -80,11 +80,11 @@ function hashMap() {
 
     function length() {
         let length = 0;
-        for (let el of map) {
-            if (el !== undefined) {
-                while (el !== null) {
-                el = el.nextNode;
-                length ++;
+        for (let bucket of map) {
+            if (bucket !== undefined) {
+                while (bucket !== null) {
+                    bucket = bucket.nextNode;
+                    length ++;
                 }
             }
         }
@@ -96,10 +96,47 @@ function hashMap() {
         map = Array(capacity);
     }
 
+    function keys() {
+        let keysArr = [];
+        for (let bucket of map) {
+            if (bucket !== undefined) {
+                while (bucket !== null) {
+                    keysArr.push(bucket.pair[0]);
+                    bucket = bucket.nextNode;
+                }
+            }
+        }
+        return keysArr;
+    }
+
+    function values() {
+        let valuesArr = [];
+        for (let bucket of map) {
+            if (bucket !== undefined) {
+                while (bucket !== null) {
+                    valuesArr.push(bucket.pair[1]);
+                    bucket = bucket.nextNode;
+                }
+            }
+        }
+        return valuesArr;
+    }
+
+    function entries() {
+        let entriesArr = [];
+        for (let bucket of map) {
+            if (bucket !== undefined) {
+                while (bucket !== null) {
+                    entriesArr.push(bucket.pair);
+                    bucket = bucket.nextNode;
+                }
+            }
+        }
+        return entriesArr;
+    }
 
 
-
-    return {hash, set, get, has, remove, clear, length, get map() { return map;}};
+    return {hash, set, get, has, remove, clear, length, keys, values, entries, get map() { return map;}};
 }
 
 //p is the [key, value] pair

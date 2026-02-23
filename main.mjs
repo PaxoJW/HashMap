@@ -23,7 +23,14 @@ console.log(test.has('monkey')); //false
 console.log(test.has('hat')); //true
 
 console.log(test.length()); //12
+
+console.log(test.keys());
+console.log(test.values());
+console.log(test.entries());
+
 test.clear();
 console.log(test.length()); //0
+
+
 
 console.log(test.map);
