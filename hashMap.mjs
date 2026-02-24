@@ -1,7 +1,7 @@
 function hashMap() {
     let capacity = 16;
     let loadFactor = 0.75;
-    // const maxInputs = Math.floor(capacity * loadFactor);
+    const maxInputs = Math.floor(capacity * loadFactor);
 
     let map = Array(capacity);
     
@@ -16,29 +16,32 @@ function hashMap() {
         return hashCode;
     }
 
+    const entriesF = entries();
     function set(key, value) {
-        // if (hashMap.length > maxInputs) {
-        //     return; //will need to expand array memory later
-        // }
+        if (length() + 1 > maxInputs) {
+            capacity *= 2; //we double capacity
+            // const entries = entries();
+            map = Array(capacity);
+            for (let entry of entriesF) {
+                set(entry[0], entry[1]);
+                console.log(length());
+            }
+        }
+
         const hashCode = hash(key);
         if (map[hashCode] === undefined) {
             map[hashCode] = Node([key, value]);
-            console.log("im running");
         } else {
             let bucket = map[hashCode];
             while (bucket.pair[0] !== key) {
                 if (bucket.nextNode !== null) {
-                    console.log("im running 2");
                     bucket = bucket.nextNode;
                 } else {
-                    console.log("im running 3");
                     bucket.nextNode = Node([key, value]);
                     return;
                 }
             }
-            console.log("im running 4");
             bucket.pair[1] = value;
-            console.log("bucket:", bucket)
         }
     }
 
@@ -99,6 +102,10 @@ function hashMap() {
 
     
     function clear() {
+        //when clearing resie to the smallest possible
+        //we can't use this function to clear the array
+        //when capacity is exceeded
+        capacity = 16;
         map = Array(capacity);
     }
 
